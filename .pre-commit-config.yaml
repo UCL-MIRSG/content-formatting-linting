@@ -1,0 +1,28 @@
+repos:
+    ## GENERAL
+    # here a list of general linting tools
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v4.0.1
+      hooks:
+          - id: check-docstring-first
+          - id: check-executables-have-shebangs
+          - id: check-merge-conflict
+          - id: end-of-file-fixer
+          - id: mixed-line-ending
+            args: [--fix=lf]
+          - id: requirements-txt-fixer
+          - id: trailing-whitespace
+    ## PYTHON
+    # sort imports alphabetically
+    - repo: https://github.com/pycqa/isort
+      rev: 5.10.1
+      hooks:
+          - id: isort
+            types: [text]
+            types_or: [python, cython]
+            args: ["--profile", "black"]
+    # formatting code
+    - repo: https://github.com/ambv/black
+      rev: 21.11b1
+      hooks:
+          - id: black
