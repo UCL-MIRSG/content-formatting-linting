@@ -20,9 +20,8 @@ jobs:
           path: |
             ${{ env.pythonLocation }}
             ~/.cache/pre-commit
-          key: >
-            ${{ hashFiles('requirements.txt') }}-
-            ${{ hashFiles('.pre-commit-config.yaml') }}
+          key: |
+            ${{ hashFiles('requirements.txt') }}-${{ hashFiles('.pre-commit-config.yaml') }}
 
       - name: install dependencies
         run: pip install -r requirements.txt
