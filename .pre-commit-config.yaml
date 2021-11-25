@@ -1,28 +1,71 @@
 repos:
-    ## GENERAL
-    # here a list of general linting tools
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v4.0.1
-      hooks:
-          - id: check-docstring-first
-          - id: check-executables-have-shebangs
-          - id: check-merge-conflict
-          - id: end-of-file-fixer
-          - id: mixed-line-ending
-            args: [--fix=lf]
-          - id: requirements-txt-fixer
-          - id: trailing-whitespace
-    ## PYTHON
-    # sort imports alphabetically
-    - repo: https://github.com/pycqa/isort
-      rev: 5.10.1
-      hooks:
-          - id: isort
-            types: [text]
-            types_or: [python, cython]
-            args: ["--profile", "black"]
-    # formatting code
-    - repo: https://github.com/ambv/black
-      rev: 21.11b1
-      hooks:
-          - id: black
+  # general formatting
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+
+  # formatting mainly for web/config files
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.4.1
+    hooks:
+      - id: prettier
+        files: \.(js|ts|jsx|tsx|css|less|html|json|markdown|md|yaml|yml)$
+
+  # sorts python imports alphabetically
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        types: [text]
+        types_or: [python, cython]
+        args: ["--profile", "black"]
+
+  # python linting
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+
+  # formats python code
+  - repo: https://github.com/ambv/black
+    rev: 21.11b1
+    hooks:
+      - id: black
+
+  # checks python typing
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.910
+    hooks:
+      - id: mypy
+
+  # docker linter
+  - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
+    rev: v0.1.0
+    hooks:
+      - id: dockerfilelint
+
+  # GitHub actions linter
+  - repo: https://github.com/sirosen/check-jsonschema
+    rev: 0.7.1
+    hooks:
+      - id: check-github-actions
+      - id: check-github-workflows
+
+  # shell scripts linter
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.7.2.1
+    hooks:
+      - id: shellcheck
