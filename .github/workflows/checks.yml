@@ -9,15 +9,23 @@ jobs:
       - name: checkout source
         uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: set up python
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+      - name: cache stuff
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ env.pythonLocation }}
+            ~/.cache/pre-commit
+          key: >
+            ${{ hashFiles('requirements.txt') }}-
+            ${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: install dependencies
+        run: pip install -r requirements.txt
 
       - name: Install pre-commit hooks
-        run: |
-          pre-commit install
+        run: pre-commit install
