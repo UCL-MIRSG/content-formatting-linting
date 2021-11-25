@@ -29,10 +29,10 @@ jobs:
       - name: Install pre-commit hooks
         run: pre-commit install
 
-      # this will run on all files in the repo not just those that have been
-      # committed once formatting has been applied once globally from then on
-      # the files being changed by pre-commit should be those that are being
-      # committed - provided that people are using the pre-commit hook to
-      # format their code
+      # This will run on all files in the repo not just those that have been
+      # committed. Once formatting has been applied once globally, from then on
+      # the files being changed by pre-commit should be just those that are
+      # being committed - provided that people are using the pre-commit hook to
+      # format their code.
       - name: run pre-commit
         run: pre-commit run --all-files
